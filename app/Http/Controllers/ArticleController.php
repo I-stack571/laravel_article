@@ -9,7 +9,8 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        // dd($articles);
         $data = ['articles' => $articles];
         return view('articles.index', $data);
     }
@@ -42,19 +43,33 @@ class ArticleController extends Controller
         //
     }
 
-    public function edit(Article $article)
+    public function edit($id)
     {
-        $data = ['article' => $article];
-        return view('articles.edit', $data);
+        $article = Article::where('id', $id)->first();
+        return view('articles.edit', compact('article'));
     }
 
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+
+        $target = Article::where('id', $request->id)->first();
+        $target->title = $request->title ?? null;
+        $target->body = $request->body ?? null;
+        $target->save();
+
+        return redirect()->route('articles.index')->with('success', '記事が更新されました');
     }
 
-    public function destroy(Article $article)
+ 
+    public function destroy($id)
     {
-        //
+        $item = Article::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('articles.index')->with('success', 'アイテムが削除されました');
     }
 }
