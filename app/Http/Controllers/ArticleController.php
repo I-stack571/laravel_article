@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->get();
+        $articles = Article::with(['likes'])->orderBy('created_at', 'desc')->paginate(10);
         // dd($articles);
         $data = ['articles' => $articles];
         return view('articles.index', $data);
@@ -29,6 +30,7 @@ class ArticleController extends Controller
             'body' => 'required'
         ]);
         $article = new Article();
+        $article->user_id = Auth::id(); // 一行追加
         $article->title = $request->title;
         $article->body = $request->body;
         $article->save();
