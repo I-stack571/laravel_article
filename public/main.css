@@ -7,6 +7,18 @@ header {
     background: #4470b1;
     color: #fff;
 }
+header nav ul {
+    display: flex;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+header nav ul li {
+    margin: 0 10px;
+}
+header nav ul li a.active {
+    color: #fff;
+}
 .site-title {
     font-size: 1.3rem;
 }
@@ -43,4 +55,34 @@ ul.alert {
     padding: 1rem 0;
     border-top: 1px dotted #ddd;
     border-bottom: 1px dotted #ddd;
+}
+button, .btn {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: #eee;
+    color: #333;
+    font-size: .9rem;
+    cursor: pointer;
+}
+button:hover, .btn:hover {
+    background: #ddd;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    background: #4470b1;
+    color: rgba(255, 255, 255, .7);
+}
+.welcome {
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 6px;
+    background: #34495e;
+    text-align: center;
+    color: #fff;
 }

@@ -13,5 +13,6 @@
                 </div>
             </div>
         </div>
+    <a href="{{ route('articles.index')}}">記事の一覧ページへのリンク</a>
     </div>
 </x-app-layout>
